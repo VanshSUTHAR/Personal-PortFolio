@@ -41,7 +41,7 @@ export default function ContactPage() {
         <motion.div {...fadeUp(0)} className="mb-14">
           <span className="text-xs font-medium tracking-widest uppercase" style={{ color: "var(--accent)" }}>Contact</span>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-display mt-3 leading-tight" style={{ color: "var(--fg)" }}>
-            Let&apos;s<br /><em>Work Together</em>
+            Let&apos;s Work Together
           </h1>
         </motion.div>
 

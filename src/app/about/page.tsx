@@ -61,7 +61,7 @@ export default function AboutPage() {
         <motion.div {...fadeUp(0)} className="mb-14">
           <span className="text-xs font-medium tracking-widest uppercase" style={{ color: "var(--accent)" }}>About</span>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-display mt-3 leading-tight" style={{ color: "var(--fg)" }}>
-            The Developer<br /><em>Behind the Work</em>
+            The Developer Behind the Work
           </h1>
         </motion.div>
 
