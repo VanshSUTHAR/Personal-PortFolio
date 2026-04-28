@@ -5,35 +5,7 @@ import Link from "next/link";
 import { FiArrowRight, FiGithub } from "react-icons/fi";
 import Image from "next/image";
 import image1 from "../image/Vansh.jpg";
-import { useEffect, useState } from "react";
-
-export const TypewriterEffect = ({ words }: { words: string[] }) => {
-  const [text, setText] = useState("");
-  const [index, setIndex] = useState(0);
-  const [wordIndex, setWordIndex] = useState(0);
-
-  useEffect(() => {
-    const currentWord = words[wordIndex];
-
-    if (index < currentWord.length) {
-      const timeout = setTimeout(() => {
-        setText((prev) => prev + currentWord[index]);
-        setIndex(index + 1);
-      }, 50);
-      return () => clearTimeout(timeout);
-    } else {
-      const timeout = setTimeout(() => {
-        setText("");
-        setIndex(0);
-        setWordIndex((prev) => (prev + 1) % words.length);
-      }, 1500);
-      return () => clearTimeout(timeout);
-    }
-  }, [index, wordIndex, words]);
-
-  return <span>{text}</span>;
-};
-
+import { TypewriterEffect } from "@/components/TypewriterEffect";
 const TECH = ["React.js", "Next.js", "Node.js", "MongoDB", "Express.js", "Tailwind CSS", "TypeScript", "Supabase", "Vercel", "REST APIs", "Git", "Postman"];
 
 export default function HomePage() {
