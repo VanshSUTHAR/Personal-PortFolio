@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Light theme ── */
+:root {
+  --bg: #f7f5f0;
+  --bg-card: #ffffff;
+  --fg: #1a1814;
+  --fg-muted: #6b6560;
+  --fg-subtle: #a8a29e;
+  --border: #e5e0d8;
+  --accent: #c4621f;
+  --accent-light: #f0e6db;
+  --accent-hover: #a84f18;
+  --shadow: 0 1px 3px rgba(26,24,20,0.08), 0 4px 16px rgba(26,24,20,0.04);
+  --shadow-lg: 0 8px 32px rgba(26,24,20,0.12), 0 2px 8px rgba(26,24,20,0.06);
+}
+
+/* ── Dark theme ── */
+.dark {
+  --bg: #0f0e0c;
+  --bg-card: #1a1814;
+  --fg: #f0ebe3;
+  --fg-muted: #a09890;
+  --fg-subtle: #6b6560;
+  --border: #2a2620;
+  --accent: #e07b3a;
+  --accent-light: #2a1e14;
+  --accent-hover: #c4621f;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* ── Sepia theme ── */
+.sepia-theme {
+  --bg: #fdf8f0;
+  --bg-card: #fefcf7;
+  --fg: #2c2518;
+  --fg-muted: #7a6e5a;
+  --fg-subtle: #b0a898;
+  --border: #e8dfd0;
+  --accent: #8b5e3c;
+  --accent-light: #f5ede0;
+  --accent-hover: #7a4f30;
+  --shadow: 0 1px 3px rgba(44,37,24,0.08), 0 4px 16px rgba(44,37,24,0.04);
+  --shadow-lg: 0 8px 32px rgba(44,37,24,0.12), 0 2px 8px rgba(44,37,24,0.06);
+}
+
+/* ── Slate theme ── */
+.slate-theme {
+  --bg: #0d1117;
+  --bg-card: #161b22;
+  --fg: #e6edf3;
+  --fg-muted: #8b949e;
+  --fg-subtle: #4a5568;
+  --border: #21262d;
+  --accent: #58a6ff;
+  --accent-light: #0d2344;
+  --accent-hover: #79b8ff;
+  --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.25);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body), system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+/* ── Focus styles ── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Selection ── */
+::selection {
+  background-color: var(--accent-light);
+  color: var(--fg);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-subtle);
+}
+
+/* ── Utilities ── */
+.text-muted {
+  color: var(--fg-muted);
+}
+
+.text-subtle {
+  color: var(--fg-subtle);
+}
+
+.border-default {
+  border-color: var(--border);
+}
+
+.bg-card {
+  background-color: var(--bg-card);
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* ── Prose letter-spacing for display ── */
+.tracking-display {
+  letter-spacing: -0.03em;
+}
+
+/* ── Animated underline ── */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
+}
+.link-underline:hover::after {
+  width: 100%;
+}
