@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import {
   SiReact, SiNextdotjs, SiNodedotjs, SiMongodb, SiExpress,
   SiTailwindcss, SiTypescript, SiSupabase, SiGit, SiVercel,
-  SiPostman, SiJavascript, SiHtml5,  SiGithub,
+  SiPostman, SiJavascript, SiHtml5, SiGithub,
 } from "react-icons/si";
 import { FiExternalLink } from "react-icons/fi";
 
@@ -27,14 +27,14 @@ const SKILLS = [
 ];
 
 const CERTIFICATES = [
-  { name: "Exploratory Data Analysis for Machine Learning", org: "IBM" },
-  { name: "HTML, CSS & JavaScript for Web Developers", org: "Johns Hopkins" },
-  { name: "Database Design and Basic SQL in PostgreSQL", org: "U of Michigan" },
-  { name: "Inheritance and Data Structures in Java", org: "U of Pennsylvania" },
-  { name: "Introduction to Java", org: "Learn Quest" },
-  { name: "Building Generative AI-Powered Apps with Python", org: "AWS" },
-  { name: "Cloud Technical Essentials", org: "AWS" },
-  { name: "Machine Learning with Python", org: "IBM" },
+  { name: "Exploratory Data Analysis for Machine Learning", org: "IBM", href: "/certificates/Exploratory Data Analysis for Machine Learning.pdf" },
+  { name: "HTML, CSS & JavaScript for Web Developers", org: "Johns Hopkins", href: "/certificates/HTML, CSS, and Javascript for Web Developers.pdf" },
+  { name: "Inheritance and Data Structures in Java", org: "U of Pennsylvania", href: "/certificates/Inheritance and Data Structures in Java.pdf" },
+  { name: "Introduction to Java", org: "Learn Quest", href: "/certificates/Introduction to Java.pdf" },
+  { name: "Building Generative AI-Powered Apps with Python", org: "IBM", href: "/certificates/Building Generative AI-Powered Applications with Python.pdf" },
+  { name: "AWS Cloud Technical Essentials", org: "AWS", href: "/certificates/AWS Cloud Technical Essentials.pdf" },
+  { name: "Machine Learning with Python", org: "IBM", href: "/certificates/Machine Learning with Python.pdf" },
+  { name: "Machine Learning with Python.pdf", org: "Microsoft", href: "/certificates/Back-End Development with .NET.pdf" },
 ];
 
 const FACTS = [
@@ -49,7 +49,7 @@ const FACTS = [
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { delay, duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] },
+  transition: { delay, duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
 });
 
 export default function AboutPage() {
@@ -121,10 +121,18 @@ export default function AboutPage() {
             <motion.div {...fadeUp(0.35)}>
               <h3 className="text-[11px] font-medium tracking-widest uppercase mb-5" style={{ color: "var(--fg-subtle)" }}>Online Certificates</h3>
               <div className="space-y-0">
-                {CERTIFICATES.map(({ name, org }) => (
+                {CERTIFICATES.map(({ name, org, href }) => (
+
                   <div key={name} className="flex justify-between items-start gap-3 py-3 border-b text-sm" style={{ borderColor: "var(--border)" }}>
-                    <span style={{ color: "var(--fg)" }}>{name}</span>
-                    <span className="flex-shrink-0 text-xs font-medium" style={{ color: "var(--accent)" }}>{org}</span>
+                    <span className="w-40 flex-shrink-0" style={{ color: "var(--fg-subtle)" }}>{name}</span>
+                    {href ? (
+
+                      <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} className="flex items-center gap-1 link-underline break-all" style={{ color: "var(--accent)" }}>
+                        {org} {href.startsWith("http") && <FiExternalLink size={11} />}
+                      </a>
+                    ) : (
+                      <span style={{ color: "var(--fg)" }}>{org}</span>
+                    )}
                   </div>
                 ))}
               </div>
