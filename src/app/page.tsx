@@ -31,75 +31,75 @@ export default function HomePage() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24">
 
           {/* Left Column */}
-         {/* Left Column */}
-<div className="flex-1 space-y-12 z-10 text-center lg:text-left">
-  <div className="space-y-4">
-    <h1 className="font-bold leading-[0.9] tracking-tighter" style={{ fontSize: "clamp(3.5rem, 9vw, 7rem)" }}>
-      <span className="block">Building</span>
-      <span className="text-amber-500 italic min-h-[1em] inline-block">
-        <TypewriterEffect words={["Experiences.", "for the Web.", "Products."]} />
-      </span>
-    </h1>
-  </div>
+          {/* Left Column */}
+          <div className="flex-1 space-y-12 z-10 text-center lg:text-left">
+            <div className="space-y-4">
+              <h1 className="font-bold leading-[0.9] tracking-tighter" style={{ fontSize: "clamp(3.5rem, 9vw, 7rem)" }}>
+                <span className="block">Building</span>
+                <span className="text-amber-500 italic min-h-[1em] inline-block">
+                  <TypewriterEffect words={["Experiences.", "for the Web.", "Products."]} />
+                </span>
+              </h1>
+            </div>
 
-  <motion.p
-    initial={{ opacity: 0, y: 15 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    className="text-lg sm:text-xl text-slate-500 dark:text-slate-400 max-w-xl leading-relaxed font-light mx-auto lg:mx-0"
-  >
-    I&apos;m <strong className="text-slate-900 dark:text-white font-semibold">Vansh Suthar</strong> — a final-year CS student
-    & MERN intern at Concatstring Solutions. I craft full-stack web applications with care.
-  </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-lg sm:text-xl text-slate-500 dark:text-slate-400 max-w-xl leading-relaxed font-light mx-auto lg:mx-0"
+            >
+              I&apos;m <strong className="text-slate-900 dark:text-white font-semibold">Vansh Suthar</strong> — a final-year CS student
+              & MERN intern at Concatstring Solutions. I craft full-stack web applications with care.
+            </motion.p>
 
-  {/* FIXED SECTION: Wrapped buttons and links together to control spacing */}
-  <div className="space-y-8"> 
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      className="flex flex-wrap justify-center lg:justify-start gap-5"
-    >
-      <Link
-        href="/projects"
-        className="group relative px-8 py-4 bg-slate-900 text-white dark:bg-white dark:text-black rounded-full font-bold overflow-hidden transition-all hover:pr-12 shadow-xl hover:shadow-amber-500/20"
-      >
-        <span className="relative z-10">View Projects</span>
-        <FiArrowRight className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all" />
-      </Link>
-      <Link
-        href="/contact"
-        className="px-8 py-4 border-2 border-slate-200 dark:border-white/10 rounded-full font-bold hover:bg-slate-50 dark:hover:bg-white/5 transition-all"
-      >
-        Let&apos;s Talk
-      </Link>
-    </motion.div>
+            {/* FIXED SECTION: Wrapped buttons and links together to control spacing */}
+            <div className="space-y-8">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="flex flex-wrap justify-center lg:justify-start gap-5"
+              >
+                <Link
+                  href="/projects"
+                  className="group relative px-8 py-4 bg-slate-900 text-white dark:bg-white dark:text-black rounded-full font-bold overflow-hidden transition-all hover:pr-12 shadow-xl hover:shadow-amber-500/20"
+                >
+                  <span className="relative z-10">View Projects</span>
+                  <FiArrowRight className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all" />
+                </Link>
+                <Link
+                  href="/contact"
+                  className="px-8 py-4 border-2 border-slate-200 dark:border-white/10 rounded-full font-bold hover:bg-slate-50 dark:hover:bg-white/5 transition-all"
+                >
+                  Let&apos;s Talk
+                </Link>
+              </motion.div>
 
-    {/* Removed pt-12 and adjusted opacity/spacing */}
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1 }}
-      className="flex flex-wrap justify-center lg:justify-start items-center gap-3 sm:gap-4"
-    >
-      <a
-        href="https://github.com/VanshSUTHAR"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-2 text-sm text-slate-500 hover:text-amber-500 transition-colors"
-      >
-        <FiGithub size={16} /> VanshSUTHAR
-      </a>
-      <span className="text-slate-300 dark:text-slate-700">·</span>
-      <a
-        href="mailto:sutharvansh022@gmail.com"
-        className="text-sm text-slate-500 hover:text-amber-500 transition-colors"
-      >
-        sutharvansh022@gmail.com
-      </a>
-    </motion.div>
-  </div>
-</div>
+              {/* Removed pt-12 and adjusted opacity/spacing */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+                className="flex flex-wrap justify-center lg:justify-start items-center gap-3 sm:gap-4"
+              >
+                <a
+                  href="https://github.com/VanshSUTHAR"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-slate-500 hover:text-amber-500 transition-colors"
+                >
+                  <FiGithub size={16} /> VanshSUTHAR
+                </a>
+                <span className="text-slate-300 dark:text-slate-700">·</span>
+                <a
+                  href="mailto:sutharvansh022@gmail.com"
+                  className="text-sm text-slate-500 hover:text-amber-500 transition-colors"
+                >
+                  sutharvansh022@gmail.com
+                </a>
+              </motion.div>
+            </div>
+          </div>
 
           {/* Right Column: Image Card */}
           <motion.div

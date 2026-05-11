@@ -37,4 +37,17 @@ export const projects: Project[] = [
     featured: true,
     year: "2026",
   },
+  {
+  id: "company-assets-dashboard",
+  title: "Company Assets Dashboard",
+  description:
+    "A modern asset management system for tracking, assigning, and managing company devices and accessories efficiently.",
+  longDescription:
+    "Developed a full-stack company asset management platform with support for employee management, multiple asset assignments, inventory tracking, and accessories handling. Implemented dynamic asset assignment logic, serial number management, responsive UI components, and real-time data handling using React and Supabase for seamless asset monitoring across the organization.",
+  tags: ["React", "Supabase", "Tailwind CSS", "Next.js", "Netlify"],
+  url: "https://companyassetsdashboard.netlify.app",
+  github: "https://github.com/VanshSUTHAR/Personal-PortFolio",
+  featured: true,
+  year: "2026",
+},
 ];
