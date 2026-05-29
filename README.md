@@ -19,6 +19,10 @@ Project structure (key folders)
 - `src/data/` — Project data and content sources.
 - `public/` — Static assets and images.
 
+Live demo
+
+Check the deployed site on Netlify: https://vanshsuthar022.netlify.app/
+
 Run locally
 
 Install dependencies and start the dev server:
