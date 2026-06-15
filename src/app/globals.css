@@ -95,8 +95,8 @@ h1, h2, h3, h4 {
 
 /* ── Selection ── */
 ::selection {
-  background-color: var(--accent-light);
-  color: var(--fg);
+  background-color: var(--accent);
+  color: #fff;
 }
 
 /* ── Scrollbar ── */
@@ -107,11 +107,11 @@ h1, h2, h3, h4 {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: linear-gradient(to bottom, var(--accent), var(--accent-hover));
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--fg-subtle);
+  background: var(--accent-hover);
 }
 
 /* ── Utilities ── */
@@ -164,4 +164,14 @@ h1, h2, h3, h4 {
 }
 .link-underline:hover::after {
   width: 100%;
+}
+
+/* ── Page entrance animation ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#main-content {
+  animation: fadeInUp 0.5s ease both;
 }

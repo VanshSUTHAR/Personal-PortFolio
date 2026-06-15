@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FiArrowRight, FiGithub } from "react-icons/fi";
+import { FiArrowRight, FiGithub, FiDownload } from "react-icons/fi";
 import Image from "next/image";
 import image1 from "../image/Vansh.jpg";
 import { TypewriterEffect } from "@/components/TypewriterEffect";
@@ -10,7 +10,12 @@ const TECH = ["React.js", "Next.js", "Node.js", "MongoDB", "Express.js", "Tailwi
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col justify-between " style={{ background: "var(--bg)" }}>
+    <div className="min-h-screen flex flex-col justify-between relative overflow-hidden" style={{ background: "var(--bg)" }}>
+      {/* Ambient glow blobs */}
+      <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full opacity-20 blur-[120px] pointer-events-none"
+           style={{ background: "radial-gradient(circle, var(--accent), transparent)" }} />
+      <div className="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] rounded-full opacity-10 blur-[100px] pointer-events-none"
+           style={{ background: "radial-gradient(circle, #3b82f6, transparent)" }} />
 
       {/* Hero Section */}
       <section className="flex-1 flex flex-col justify-center px-4 sm:px-6 max-w-6xl mx-auto w-full pt-32 pb-20">
@@ -36,7 +41,7 @@ export default function HomePage() {
             <div className="space-y-4">
               <h1 className="font-bold leading-[0.9] tracking-tighter" style={{ fontSize: "clamp(3.5rem, 9vw, 7rem)" }}>
                 <span className="block">Building</span>
-                <span className="text-amber-500 italic min-h-[1em] inline-block">
+                <span className="italic min-h-[1em] inline-block bg-gradient-to-r from-amber-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
                   <TypewriterEffect words={["Experiences.", "for the Web.", "Products."]} />
                 </span>
               </h1>
@@ -73,6 +78,13 @@ export default function HomePage() {
                 >
                   Let&apos;s Talk
                 </Link>
+                <a
+                  href="/VANSH SUTHAR (1) (1).pdf"
+                  download="Vansh_Suthar_Resume.pdf"
+                  className="flex items-center gap-2 px-8 py-4 border-2 border-amber-500/30 hover:border-amber-500 rounded-full font-bold text-amber-600 dark:text-amber-500 hover:bg-amber-500/5 transition-all cursor-pointer"
+                >
+                  <FiDownload size={16} /> Resume
+                </a>
               </motion.div>
 
               {/* Removed pt-12 and adjusted opacity/spacing */}
@@ -113,9 +125,11 @@ export default function HomePage() {
             <motion.div
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative z-20 p-3 bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/20 rounded-[3rem] shadow-2xl"
+              className="relative z-20 p-[3px] rounded-[3rem] shadow-2xl"
+              style={{ background: "linear-gradient(135deg, rgba(224, 123, 58, 0.2), rgba(59, 130, 246, 0.2), rgba(224, 123, 58, 0.2))" }}
             >
-              <div className="overflow-hidden rounded-[2.5rem] relative bg-slate-200 dark:bg-slate-800">
+              <div className="bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/20 p-2.5 rounded-[2.95rem]">
+                <div className="overflow-hidden rounded-[2.5rem] relative bg-slate-200 dark:bg-slate-800">
                 <Image
                   src={image1}
                   width={400}
@@ -132,6 +146,7 @@ export default function HomePage() {
                   <span className="text-sm font-bold tracking-widest uppercase">VANSH SUTHAR</span>
                 </div>
               </div>
+              </div>
             </motion.div>
           </motion.div>
         </div>
@@ -141,10 +156,13 @@ export default function HomePage() {
 
       {/* Marquee Section */}
       <div className="overflow-hidden py-8 border-y border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 backdrop-blur-sm relative z-10">
-        <div className="flex w-fit animate-marquee whitespace-nowrap gap-16 pr-16">
+        <div className="flex w-fit animate-marquee whitespace-nowrap gap-16 pr-16 items-center">
           {[...TECH, ...TECH, ...TECH].map((t, i) => (
-            <span key={i} className="text-xs font-semibold tracking-widest uppercase text-slate-400 dark:text-slate-500 hover:text-amber-500 transition-colors cursor-default">
-              {t}
+            <span key={i} className="flex items-center gap-16">
+              <span className="text-xs font-semibold tracking-widest uppercase text-slate-400 dark:text-slate-500 hover:text-amber-500 transition-colors cursor-default">
+                {t}
+              </span>
+              <span className="text-amber-500/40 text-sm select-none">✦</span>
             </span>
           ))}
         </div>

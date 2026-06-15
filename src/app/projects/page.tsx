@@ -64,10 +64,19 @@ export default function ProjectsPage() {
                 initial={{ opacity: 0, scale: 0.96, y: 16 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.94 }}
-                transition={{ duration: 0.4, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative rounded-2xl overflow-hidden flex flex-col"
+                whileHover={{ y: -6, boxShadow: "var(--shadow-lg)" }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative rounded-2xl overflow-hidden flex flex-col transition-all duration-300"
                 style={{ background: "var(--bg-card)", border: "1px solid var(--border)", boxShadow: "var(--shadow)" }}
               >
+                {/* Visual header strip */}
+                <div
+                  className="h-1.5 w-full transition-all duration-500 group-hover:h-2"
+                  style={{
+                    background: `linear-gradient(90deg, var(--accent), var(--accent-hover), transparent)`
+                  }}
+                />
+
                 {/* Year badge */}
                 <span className="absolute top-5 right-5 text-xs font-medium px-2 py-1 rounded-full" style={{ background: "var(--accent-light)", color: "var(--accent)" }}>
                   {project.year}

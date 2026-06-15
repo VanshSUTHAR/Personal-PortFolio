@@ -82,8 +82,8 @@ export default function AboutPage() {
             {/* Quick facts */}
             <div className="space-y-0">
               {FACTS.map(({ label, value, href }) => (
-                <div key={label} className="flex gap-4 py-3 border-b text-sm" style={{ borderColor: "var(--border)" }}>
-                  <span className="w-24 flex-shrink-0" style={{ color: "var(--fg-subtle)" }}>{label}</span>
+                <div key={label} className="flex gap-4 py-3 border-b text-sm group" style={{ borderColor: "var(--border)" }}>
+                  <span className="w-24 flex-shrink-0 font-semibold text-[10px] uppercase tracking-widest" style={{ color: "var(--fg-subtle)" }}>{label}</span>
                   {href ? (
                     <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} className="flex items-center gap-1 link-underline break-all" style={{ color: "var(--accent)" }}>
                       {value} {href.startsWith("http") && <FiExternalLink size={11} />}
@@ -106,8 +106,12 @@ export default function AboutPage() {
                     key={label}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
+                    whileHover={{
+                      y: -4,
+                      boxShadow: `0 8px 20px ${color === "currentColor" ? "rgba(224, 123, 58, 0.2)" : color + "33"}`
+                    }}
                     transition={{ delay: 0.3 + i * 0.04 }}
-                    className="flex flex-col items-center gap-1.5 p-2.5 rounded-xl transition-transform hover:-translate-y-1 cursor-default"
+                    className="flex flex-col items-center gap-1.5 p-2.5 rounded-xl cursor-default transition-all duration-200"
                     style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}
                     title={label}
                   >

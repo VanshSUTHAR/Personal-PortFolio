@@ -73,6 +73,7 @@ export default function ContactPage() {
   const inputClass =
     "w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 " +
     "placeholder:opacity-40 focus:ring-2 focus:ring-[color:var(--accent)] " +
+    "focus:shadow-[0_0_0_4px_rgba(224,123,58,0.15)] dark:focus:shadow-[0_0_0_4px_rgba(224,123,58,0.25)] " +
     "disabled:opacity-50 disabled:cursor-not-allowed";
 
   return (
@@ -118,7 +119,7 @@ export default function ContactPage() {
                   aria-label={`${label}: ${value}`}
                 >
                   <span
-                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-110"
+                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:ring-4 group-hover:ring-[color:var(--accent-light)]"
                     style={{ background: "var(--accent-light)", color: "var(--accent)" }}
                   >
                     <Icon size={16} />
