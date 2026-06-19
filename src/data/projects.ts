@@ -45,7 +45,7 @@ export const projects: Project[] = [
     longDescription:
       "Developed a full-stack company asset management platform with support for employee management, multiple asset assignments, inventory tracking, and accessories handling. Implemented dynamic asset assignment logic, serial number management, responsive UI components, and real-time data handling using React and Supabase for seamless asset monitoring across the organization.",
     tags: ["React", "Supabase", "Tailwind CSS", "Netlify"],
-    url: "https://companyassetsdashboard.netlify.app",
+    url: "https://companydasboard.netlify.app/",
     github: "https://github.com/VanshSUTHAR/Company_assetment_dashboard/",
     featured: true,
     year: "2026",

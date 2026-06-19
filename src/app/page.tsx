@@ -79,7 +79,7 @@ export default function HomePage() {
                   Let&apos;s Talk
                 </Link>
                 <a
-                  href="/VANSH SUTHAR (1) (1).pdf"
+                  href="/Vansh_Resume.pdf"
                   download="Vansh_Suthar_Resume.pdf"
                   className="flex items-center gap-2 px-8 py-4 border-2 border-amber-500/30 hover:border-amber-500 rounded-full font-bold text-amber-600 dark:text-amber-500 hover:bg-amber-500/5 transition-all cursor-pointer"
                 >
