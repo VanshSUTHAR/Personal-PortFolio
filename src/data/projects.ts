@@ -12,19 +12,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "online-bookstore",
-    title: "Online Book Store",
-    description:
-      "A user-friendly platform for browsing and exploring a wide collection of books with smooth navigation and search.",
-    longDescription:
-      "Built a full-featured bookstore web application with advanced search, interactive UI, and seamless browsing experience. Deployed on Vercel for fast, reliable availability.",
-    tags: ["React", "Node.js", "MongoDB", "REST API", "Vercel"],
-    url: "https://online-books-frontend.vercel.app/",
-    github: "https://github.com/VanshSUTHAR/Online-Book-Store",
-    featured: true,
-    year: "2025",
-  },
-  {
     id: "lunatics",
     title: "Lunatics — Interactive Web Experience",
     description:
