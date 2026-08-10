@@ -21,7 +21,7 @@ const bodyFont = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vanshsuthar.dev"),
+  metadataBase: new URL("https://vanshsuthar022.netlify.app"),
   title: {
     default: "Vansh Suthar — MERN Stack Developer",
     template: "%s — Vansh Suthar",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://vanshsuthar.dev",
+    url: "https://vanshsuthar022.netlify.app",
     title: "Vansh Suthar — MERN Stack Developer",
     description: "Building full-stack web applications with React, Node.js, and MongoDB.",
     siteName: "Vansh Suthar Portfolio",

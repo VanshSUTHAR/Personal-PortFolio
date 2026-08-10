@@ -1,8 +1,8 @@
 .next/
 node_modules/
-.env.local
 *.env
 .DS_Store
 out/
 build/
 dist/
+config.bat

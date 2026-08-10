@@ -8,6 +8,8 @@ const EMAILJS_SERVICE_ID  = "service_doe2hxc";
 const EMAILJS_TEMPLATE_ID = "template_hdilw9m";
 const EMAILJS_PUBLIC_KEY  = "7D-9FUV5MubrOVt9z";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const SOCIAL = [
   { icon: FiGithub, label: "GitHub", value: "github.com/VanshSUTHAR",  href: "https://github.com/VanshSUTHAR" },
   { icon: FiMail,   label: "Email",  value: "sutharvansh022@gmail.com", href: "mailto:sutharvansh022@gmail.com" },
@@ -22,18 +24,47 @@ const fadeUp = (delay = 0) => ({
 
 type Status = "idle" | "sending" | "success" | "error";
 
+interface FormErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+}
+
 export default function ContactPage() {
   const [form, setForm]         = useState({ name: "", email: "", subject: "", message: "" });
+  const [errors, setErrors]     = useState<FormErrors>({});
   const [status, setStatus]     = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
+  const validate = (): boolean => {
+    const newErrors: FormErrors = {};
+    if (!form.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!EMAIL_REGEX.test(form.email.trim())) {
+      newErrors.email = "Please enter a valid email address";
+    }
+    if (!form.message.trim()) {
+      newErrors.message = "Message is required";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
     if (status === "error") setStatus("idle");
   };
 
-  const handleSend = async () => {
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
     setStatus("sending");
 
     try {
@@ -54,6 +85,7 @@ export default function ContactPage() {
 
       setStatus("success");
       setForm({ name: "", email: "", subject: "", message: "" });
+      setErrors({});
     } catch (err) {
       console.error("EmailJS error:", err);
       setErrorMsg("Something went wrong — please try again or email me directly.");
@@ -61,14 +93,13 @@ export default function ContactPage() {
     }
   };
 
-  const isValid   = form.name.trim() !== "" && form.email.trim() !== "" && form.message.trim() !== "";
   const isSending = status === "sending";
 
-  const inputStyle: React.CSSProperties = {
+  const getInputStyle = (hasError?: boolean): React.CSSProperties => ({
     background: "var(--bg-card)",
-    border:     "1px solid var(--border)",
+    border:     hasError ? "1px solid #ef4444" : "1px solid var(--border)",
     color:      "var(--fg)",
-  };
+  });
 
   const inputClass =
     "w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 " +
@@ -154,179 +185,198 @@ export default function ContactPage() {
           </motion.div>
 
           {/* Right: Form */}
-          <motion.div {...fadeUp(0.25)} className="space-y-4">
+          <motion.div {...fadeUp(0.25)}>
+            <form onSubmit={handleSubmit} noValidate className="space-y-4">
 
-            {/* Name + Email */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-[10px] sm:text-[11px] font-medium uppercase tracking-widest mb-2"
-                  style={{ color: "var(--fg-subtle)" }}
-                >
-                  Name *
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  autoComplete="name"
-                  placeholder="Your name"
-                  value={form.name}
-                  onChange={handleChange}
-                  disabled={isSending}
-                  className={inputClass}
-                  style={inputStyle}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-[10px] sm:text-[11px] font-medium uppercase tracking-widest mb-2"
-                  style={{ color: "var(--fg-subtle)" }}
-                >
-                  Email *
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  placeholder="you@email.com"
-                  value={form.email}
-                  onChange={handleChange}
-                  disabled={isSending}
-                  className={inputClass}
-                  style={inputStyle}
-                />
-              </div>
-            </div>
-
-            {/* Subject */}
-            <div>
-              <label
-                htmlFor="subject"
-                className="block text-[10px] sm:text-[11px] font-medium uppercase tracking-widest mb-2"
-                style={{ color: "var(--fg-subtle)" }}
-              >
-                Subject
-              </label>
-              <input
-                id="subject"
-                name="subject"
-                type="text"
-                placeholder="What's this about?"
-                value={form.subject}
-                onChange={handleChange}
-                disabled={isSending}
-                className={inputClass}
-                style={inputStyle}
-              />
-            </div>
-
-            {/* Message */}
-            <div>
-              <label
-                htmlFor="message"
-                className="block text-[10px] sm:text-[11px] font-medium uppercase tracking-widest mb-2"
-                style={{ color: "var(--fg-subtle)" }}
-              >
-                Message *
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows={6}
-                placeholder="Tell me about your project or idea…"
-                value={form.message}
-                onChange={handleChange}
-                disabled={isSending}
-                className={`${inputClass} resize-none`}
-                style={inputStyle}
-              />
-            </div>
-
-            {/* Send button */}
-            <motion.button
-              type="button"
-              onClick={handleSend}
-              disabled={!isValid || isSending || status === "success"}
-              className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-              style={{ background: "var(--accent)", color: "#fff" }}
-              whileHover={isValid && !isSending ? { scale: 1.01 } : {}}
-              whileTap={isValid && !isSending ? { scale: 0.99 } : {}}
-              aria-label="Send message"
-            >
-              {isSending ? (
-                <>
-                  <svg
-                    className="animate-spin w-4 h-4"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
+              {/* Name + Email */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-[10px] sm:text-[11px] font-medium uppercase tracking-widest mb-2"
+                    style={{ color: "var(--fg-subtle)" }}
                   >
-                    <circle cx="12" cy="12" r="10" strokeOpacity={0.25} />
-                    <path d="M12 2a10 10 0 0 1 10 10" />
-                  </svg>
-                  Sending…
-                </>
-              ) : status === "success" ? (
-                <>
-                  <FiCheckCircle size={15} />
-                  Message Sent!
-                </>
-              ) : (
-                <>
-                  Send Message <FiSend size={15} />
-                </>
+                    Name *
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    autoComplete="name"
+                    placeholder="Your name"
+                    value={form.name}
+                    onChange={handleChange}
+                    disabled={isSending}
+                    className={inputClass}
+                    style={getInputStyle(!!errors.name)}
+                    aria-invalid={!!errors.name}
+                    aria-describedby={errors.name ? "name-error" : undefined}
+                  />
+                  {errors.name && (
+                    <span id="name-error" className="text-xs text-red-500 mt-1 block font-medium" role="alert">
+                      {errors.name}
+                    </span>
+                  )}
+                </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-[10px] sm:text-[11px] font-medium uppercase tracking-widest mb-2"
+                    style={{ color: "var(--fg-subtle)" }}
+                  >
+                    Email *
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="you@email.com"
+                    value={form.email}
+                    onChange={handleChange}
+                    disabled={isSending}
+                    className={inputClass}
+                    style={getInputStyle(!!errors.email)}
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? "email-error" : undefined}
+                  />
+                  {errors.email && (
+                    <span id="email-error" className="text-xs text-red-500 mt-1 block font-medium" role="alert">
+                      {errors.email}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Subject */}
+              <div>
+                <label
+                  htmlFor="subject"
+                  className="block text-[10px] sm:text-[11px] font-medium uppercase tracking-widest mb-2"
+                  style={{ color: "var(--fg-subtle)" }}
+                >
+                  Subject
+                </label>
+                <input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  placeholder="What's this about?"
+                  value={form.subject}
+                  onChange={handleChange}
+                  disabled={isSending}
+                  className={inputClass}
+                  style={getInputStyle()}
+                />
+              </div>
+
+              {/* Message */}
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-[10px] sm:text-[11px] font-medium uppercase tracking-widest mb-2"
+                  style={{ color: "var(--fg-subtle)" }}
+                >
+                  Message *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={6}
+                  placeholder="Tell me about your project or idea…"
+                  value={form.message}
+                  onChange={handleChange}
+                  disabled={isSending}
+                  className={`${inputClass} resize-none`}
+                  style={getInputStyle(!!errors.message)}
+                  aria-invalid={!!errors.message}
+                  aria-describedby={errors.message ? "message-error" : undefined}
+                />
+                {errors.message && (
+                  <span id="message-error" className="text-xs text-red-500 mt-1 block font-medium" role="alert">
+                    {errors.message}
+                  </span>
+                )}
+              </div>
+
+              {/* Send button */}
+              <motion.button
+                type="submit"
+                disabled={isSending || status === "success"}
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-sm font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{ background: "var(--accent)", color: "#fff" }}
+                whileHover={!isSending ? { scale: 1.01 } : {}}
+                whileTap={!isSending ? { scale: 0.99 } : {}}
+                aria-label="Send message"
+              >
+                {isSending ? (
+                  <>
+                    <svg
+                      className="animate-spin w-4 h-4"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <circle cx="12" cy="12" r="10" strokeOpacity={0.25} />
+                      <path d="M12 2a10 10 0 0 1 10 10" />
+                    </svg>
+                    Sending…
+                  </>
+                ) : status === "success" ? (
+                  <>
+                    <FiCheckCircle size={15} />
+                    Message Sent!
+                  </>
+                ) : (
+                  <>
+                    Send Message <FiSend size={15} />
+                  </>
+                )}
+              </motion.button>
+
+              {/* Success banner */}
+              {status === "success" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-start gap-3 px-4 py-3 rounded-xl text-sm"
+                  style={{
+                    background: "var(--accent-light)",
+                    color:      "var(--accent)",
+                    border:     "1px solid var(--accent)",
+                  }}
+                  role="alert"
+                >
+                  <FiCheckCircle size={16} className="mt-0.5 flex-shrink-0" />
+                  <span>Thanks! Your message has been sent — I&apos;ll get back to you soon.</span>
+                </motion.div>
               )}
-            </motion.button>
 
-            {/* Success banner */}
-            {status === "success" && (
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex items-start gap-3 px-4 py-3 rounded-xl text-sm"
-                style={{
-                  background: "var(--accent-light)",
-                  color:      "var(--accent)",
-                  border:     "1px solid var(--accent)",
-                }}
-                role="alert"
-              >
-                <FiCheckCircle size={16} className="mt-0.5 flex-shrink-0" />
-                <span>Thanks! Your message has been sent — I&apos;ll get back to you soon.</span>
-              </motion.div>
-            )}
+              {/* Error banner */}
+              {status === "error" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-start gap-3 px-4 py-3 rounded-xl text-sm"
+                  style={{ background: "#fee2e2", color: "#b91c1c", border: "1px solid #fca5a5" }}
+                  role="alert"
+                >
+                  <FiAlertCircle size={16} className="mt-0.5 flex-shrink-0" />
+                  <span>{errorMsg}</span>
+                </motion.div>
+              )}
 
-            {/* Error banner */}
-            {status === "error" && (
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex items-start gap-3 px-4 py-3 rounded-xl text-sm"
-                style={{ background: "#fee2e2", color: "#b91c1c", border: "1px solid #fca5a5" }}
-                role="alert"
-              >
-                <FiAlertCircle size={16} className="mt-0.5 flex-shrink-0" />
-                <span>{errorMsg}</span>
-              </motion.div>
-            )}
-
-            {/* Idle hint */}
-            {status === "idle" && (
-              <p className="text-xs text-center" style={{ color: "var(--fg-subtle)" }}>
-                Sent directly to my inbox — no mail app required.
-              </p>
-            )}
+              {/* Idle hint */}
+              {status === "idle" && (
+                <p className="text-xs text-center" style={{ color: "var(--fg-subtle)" }}>
+                  Sent directly to my inbox — no mail app required.
+                </p>
+              )}
+            </form>
           </motion.div>
         </div>
       </div>
     </div>
   );
-}
+}

@@ -34,7 +34,7 @@ const CERTIFICATES = [
   { name: "Building Generative AI-Powered Apps with Python", org: "IBM", href: "/certificates/Building Generative AI-Powered Applications with Python.pdf" },
   { name: "AWS Cloud Technical Essentials", org: "AWS", href: "/certificates/AWS Cloud Technical Essentials.pdf" },
   { name: "Machine Learning with Python", org: "IBM", href: "/certificates/Machine Learning with Python.pdf" },
-  { name: "Machine Learning with Python.pdf", org: "Microsoft", href: "/certificates/Back-End Development with .NET.pdf" },
+  { name: "Back-End Development with .NET", org: "Microsoft", href: "/certificates/Back-End Development with .NET.pdf" },
 ];
 
 const FACTS = [
@@ -130,9 +130,14 @@ export default function AboutPage() {
                   <div key={name} className="flex justify-between items-start gap-3 py-3 border-b text-sm" style={{ borderColor: "var(--border)" }}>
                     <span className="w-40 flex-shrink-0" style={{ color: "var(--fg-subtle)" }}>{name}</span>
                     {href ? (
-
-                      <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} className="flex items-center gap-1 link-underline break-all" style={{ color: "var(--accent)" }}>
-                        {org} {href.startsWith("http") && <FiExternalLink size={11} />}
+                      <a
+                        href={href}
+                        target={href.startsWith("http") || href.endsWith(".pdf") ? "_blank" : undefined}
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 link-underline break-all"
+                        style={{ color: "var(--accent)" }}
+                      >
+                        {org} {(href.startsWith("http") || href.endsWith(".pdf")) && <FiExternalLink size={11} />}
                       </a>
                     ) : (
                       <span style={{ color: "var(--fg)" }}>{org}</span>
